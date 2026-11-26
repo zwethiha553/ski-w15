@@ -22,7 +22,7 @@ def get_key():
     return key.lower()
 
 
-def start_game():
+def start_game):
     return {"player_x": WIDTH // 2, "direction": 1, "distance": 0,
             "speed": START_INTERVAL, "alive": True, "running": False,
             "field": [" " * WIDTH for _ in range(HEIGHT)], "score": 0, "lives": 3}
@@ -38,6 +38,11 @@ def make_row(distance):
         pos = random.randrange(WIDTH)
         if row[pos] == " ":
             row[pos] = "A"
+        if random.random() < 0.25:          # 
+            pos = random.randrange(WIDTH)
+        if row[pos] == " ":
+            row[pos] = "$"
+
     return "".join(row)
 
 
@@ -48,7 +53,7 @@ def update_game(game):
     nx = game["player_x"] + game["direction"]
     if nx < 0 or nx >= WIDTH:
         game["alive"] = False
-        return
+            game["score"] += 10  
     game["player_x"] = nx
     game["field"].pop()
     game["field"].insert(0, make_row(game["distance"]))
@@ -75,6 +80,7 @@ def draw_game(game):
     print(f"距離 {game['distance']:<5} 得点 {game['score']:<6} 速度 {1/game['speed']:.1f}行/秒    ")
     status = ("ゲームオーバー [R]でリスタート" if not game["alive"]
               else "滑走中" if game["running"] else "[Space]でスタート")
+        print(f"残りライフ {game['lives']}    ")
     print(status.ljust(WIDTH + 22))
     print("← →: 方向変更  Space: 開始/停止  R: 再開  Q: 終了".ljust(WIDTH + 22))
     sys.stdout.flush()
