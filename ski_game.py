@@ -25,7 +25,7 @@ def get_key():
 def start_game():
     return {"player_x": WIDTH // 2, "direction": 1, "distance": 0,
             "speed": START_INTERVAL, "alive": True, "running": False,
-            "field": [" " * WIDTH for _ in range(HEIGHT)], "score": 0}
+            "field": [" " * WIDTH for _ in range(HEIGHT)], "score": 0, "lives": 3}
 
 
 def make_row(distance):
