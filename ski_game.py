@@ -19,11 +19,10 @@ def get_key():
     if key in ("\x00", "\xe0"):
         special = msvcrt.getwch()
         return "left" if special == "K" else "right" if special == "M" else None
-    return key.lower()
+    return key.lower(  )
 
-
-def start_game):
-    return {"player_x": WIDTH // 2, "direction": 1, "distance": 0,
+ def start_game():
+   return {"player_x": WIDTH // 2, "direction": 1, "distance": 0,
             "speed": START_INTERVAL, "alive": True, "running": False,
             "field": [" " * WIDTH for _ in range(HEIGHT)], "score": 0, "lives": 3}
 
