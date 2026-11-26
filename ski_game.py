@@ -55,8 +55,11 @@ def update_game(game):
     game["distance"] += 1
     game["score"] = game["distance"] * 10
     game["speed"] = max(MIN_INTERVAL, START_INTERVAL - game["distance"] * 0.001)
-    if game["field"][HEIGHT - 1][game["player_x"]] != " ":
-        game["alive"] = False
+        cell = game["field"][HEIGHT - 1][game["player_x"]]
+    if cell in ("A", "*"):
+        game["lives"] -= 1
+        if game["lives"] == 0:
+            game["alive"] = False
 
 
 def draw_game(game):
