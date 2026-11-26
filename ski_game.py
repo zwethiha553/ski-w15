@@ -77,6 +77,7 @@ def draw_game(game):
         print("|" + "".join(line) + "|")
     print("+" + "-" * WIDTH + "+")
     print(f"距離 {game['distance']:<5} 得点 {game['score']:<6} 速度 {1/game['speed']:.1f}行/秒    ")
+        print(f"残りライフ {game['lives']}    最高得点 {best_score:<6}")  
     status = ("ゲームオーバー [R]でリスタート" if not game["alive"]
               else "滑走中" if game["running"] else "[Space]でスタート")
         print(f"残りライフ {game['lives']}    ")
@@ -92,6 +93,7 @@ def main():
     # Windows 10/11のVS Code内蔵ターミナルを想定
     os.system("")
     game = start_game()
+    best_score = 0  
     sys.stdout.write("\x1b[2J\x1b[?25l")
     try:
         while True:
@@ -107,9 +109,10 @@ def main():
                 game["direction"] = -1
             elif key in ("right", "d"):
                 game["direction"] = 1
-            if game["running"]:
+                        if game["running"]:
                 update_game(game)
-            draw_game(game)
+                best_score = max(best_score, game["score"])
+            draw_game(game, best_score)
             time.sleep(game["speed"] if game["running"] else 0.08)
     finally:
         sys.stdout.write("\x1b[?25h\n")
